@@ -2,7 +2,7 @@
 
 # %% auto 0
 __all__ = ['get_colab_url2md', 'create_comment_body', 'get_api', 'upload_modified_nbs', 'open_zip', 'upload_at', 'download',
-           'download_payload', 'post_colab_links', 'update_comment', 'create_issue_nb_fail']
+           'download_payload', 'post_colab_links', 'create_issue_nb_fail']
 
 # %% ../nbs/03_actions.ipynb 3
 import json
@@ -134,23 +134,7 @@ def post_colab_links(owner="wandb", repo="nb_helpers", token=None):
         print(f">> Creating comment on PR #{pr}\n{body}\n")
         api.issues.create_comment(issue_number=pr, body=body)
 
-# %% ../nbs/03_actions.ipynb 25
-def update_comment(issue, body, comment_id, owner="wandb", repo="nb_helpers", token=None):
-    api, payload = get_api(owner, repo, token)
-    
-    if "workflow" in payload:
-        issue = 1
-    else:
-        issue = payload.number
-        
-    if comment_id > 0:
-        print(f">> Updating comment on PR #{issue}\n{body}\n")
-        api.issues.update_comment(comment_id, body)
-    else:
-        print(f">> Creating comment on PR #{issue}\n{body}\n")
-        api.issues.create_comment(issue_number=issue, body=body)
-
-# %% ../nbs/03_actions.ipynb 27
+# %% ../nbs/03_actions.ipynb 26
 def create_issue_nb_fail(fname, traceback=None, owner="wandb", repo="nb_helpers", token=None):
     "Creates issue of failing nb"
     print("="*75)
